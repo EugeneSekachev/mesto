@@ -1,0 +1,5 @@
+.profile__date {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}

@@ -1,0 +1,17 @@
+.modal__container {
+  min-width: 430px;
+  position: relative;
+  -webkit-box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+          box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  background-color: white;
+  padding: 34px 36px 36px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+@media screen and (max-width: 550px) {
+  .modal__container {
+    min-width: 300px;
+  }
+}

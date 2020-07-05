@@ -1,0 +1,17 @@
+@import url(./__image/element__image.css);
+@import url(./__sign/element__sign.css);
+@import url(./__text/element__text.css);
+@import url(./__heart/element__heart.css);
+
+.element {
+  background-color: white;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: black;
+  height: 100%;
+  max-width: 282px;
+  max-height: 361px;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0;
+}

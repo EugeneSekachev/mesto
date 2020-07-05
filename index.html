@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Mesto</title>
+</head>
+
+<body class="page">
+  <div class="header">
+    <img src="./image/logo__header.svg" alt="Место Россия" class="header__logo">
+  </div>
+  <main class="content">
+    <section class="profile">
+      <div class="profile__user">
+        <img src="./image/profile__avatar.jpg" alt="Аватар пользователя" class="profile__avatar">
+        <div class="profile__date">
+          <div class="profile__info">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <p class="profile__about">Исследователь океана</p>
+          </div>
+          <button class="profile__edit-button"></button>
+        </div>
+      </div>
+      <button type="submit" class="profile__add-button"></button>
+    </section>
+    <section class="elements">
+      <figure class="element">
+        <img src="./image/element__image-karachaevsk.png" alt="Карачаевск" class="element__image">
+        <figcaption class="element__sign">
+          <p class="element__text">Карачаевск</p>
+          <button class="element__heart"></button>
+        </figcaption>
+      </figure>
+      <figure class="element">
+        <img src="./image/element__image-elbrus.png" alt="Эльбрус" class="element__image">
+        <figcaption class="element__sign">
+          <p class="element__text">Гора Эльбрус</p>
+          <button class="element__heart"></button>
+        </figcaption>
+      </figure>
+      <figure class="element">
+        <img src="./image/element__image-dombay.png" alt="Домбай" class="element__image">
+        <figcaption class="element__sign">
+          <p class="element__text">Домбай</p>
+          <button class="element__heart"></button>
+        </figcaption>
+      </figure>
+      <figure class="element">
+        <img src="./image/element__image-elbrus.png" alt="Эльбрус" class="element__image">
+        <figcaption class="element__sign">
+          <p class="element__text">Гора Эльбрус</p>
+          <button class="element__heart"></button>
+        </figcaption>
+      </figure>
+      <figure class="element">
+        <img src="./image/element__image-dombay.png" alt="Домбай" class="element__image">
+        <figcaption class="element__sign">
+          <p class="element__text">Домбай</p>
+          <button class="element__heart"></button>
+        </figcaption>
+      </figure>
+      <figure class="element">
+        <img src="./image/element__image-karachaevsk.png" alt="Карачаевск" class="element__image">
+        <figcaption class="element__sign">
+          <p class="element__text">Карачаевск</p>
+          <button class="element__heart"></button>
+        </figcaption>
+      </figure>
+      <img src="./image/input__btn-image.svg" alt="">
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+  </footer>
+  <div class="modal">
+    <div class="modal__container">
+      <button class="modal__close-button"></button>
+      <h2 class="modal__title">Редактировать профиль</h2>
+      <form action="#" class="modal__form">
+        <input type="text" name="name" class="modal__input modal__input_type_name" value="Жак-Ив Кусто"
+          placeholder="Имя">
+        <input type="text" name="about" class="modal__input modal__input_type_about" value="Исследователь океана"
+          placeholder="О себе">
+        <button type="submit" class="modal__save-button">Сохранить</button>
+      </form>
+    </div>
+  </div>
+  <script src="index.js "></script>
+</body>
+
+</html>
