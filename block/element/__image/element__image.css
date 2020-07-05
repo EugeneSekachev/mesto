@@ -1,4 +1,7 @@
 .element__image {
-  max-width: 100%;
+  width: 282px;
+  height: 282px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
 }
 
