@@ -1,7 +1,5 @@
 .modal__save-button:hover {
   background: rgba(0, 0, 0, 0.8);
-  -webkit-transition: 2s linear;
-  -o-transition: 2s linear;
   -webkit-transition: 1s linear;
   -o-transition: 1s linear;
   transition: 1s linear;

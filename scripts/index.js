@@ -8,6 +8,7 @@ const inputAbout = document.querySelector('.modal__input_type_about');
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
 
+
 //функция открытия и закрытия попап
 function toggleModal() {
   modal.classList.toggle('modal_is-open');

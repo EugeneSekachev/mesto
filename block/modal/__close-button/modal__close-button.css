@@ -1,7 +1,5 @@
 .modal__close-button:hover {
   opacity: 0.6;
-  -webkit-transition: 2s linear;
-  -o-transition: 2s linear;
   -webkit-transition: 1s linear;
   -o-transition: 1s linear;
   transition: 1s linear;
