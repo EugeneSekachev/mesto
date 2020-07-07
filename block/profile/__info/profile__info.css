@@ -1,12 +1,14 @@
 .profile__info {
   max-width: 336px;
-  min-height: 77px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 350px;
 }
 
 @media screen and (max-width: 900px) {
   .profile__info {
     max-width: 280px;
-    min-height: 66px;
     margin-bottom: 36px;
   }
 }

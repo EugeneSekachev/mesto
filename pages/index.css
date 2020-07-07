@@ -8,5 +8,5 @@
 @import url(../block/element/element.css);
 @import url(../block/footer/footer.css);
 @import url(../block/modal/modal.css);
-@import url(../block/modal/__is-open/modal__is-open.css);
+@import url(../block/modal/_is-open/modal_is-open.css);
 

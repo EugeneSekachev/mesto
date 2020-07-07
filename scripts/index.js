@@ -1,3 +1,4 @@
+//объявление переменных
 const openModalButton = document.querySelector('.profile__edit-button');
 const closeModalButton = document.querySelector('.modal__close-button');
 const modal = document.querySelector('.modal');
@@ -7,21 +8,33 @@ const inputAbout = document.querySelector('.modal__input_type_about');
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
 
+//функция открытия и закрытия попап
 function toggleModal() {
-  modal.classList.toggle('modal__is-open');
-}
-
-openModalButton.addEventListener('click', () => {
+  modal.classList.toggle('modal_is-open');
+};
+//функция возвращение формы
+function closeModalForm() {
   toggleModal();
+
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
-});
-closeModalButton.addEventListener('click', toggleModal);
+};
+//функция сохранение формы
+function submitModalForm() {
+  event.preventDefault();
 
-modalForm.addEventListener('submit', (event) => {
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
 
-  event.preventDefault();
   toggleModal();
-})
+};
+
+
+//отправка формы
+modalForm.addEventListener('submit', submitModalForm);
+//открытие и закрытие попапа
+closeModalButton.addEventListener('click', closeModalForm);
+//закрытие попапа через крестик
+openModalButton.addEventListener('click', toggleModal);
+
+

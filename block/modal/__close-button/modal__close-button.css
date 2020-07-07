@@ -1,5 +1,5 @@
 .modal__close-button:hover {
-  opacity: 0.5;
+  opacity: 0.6;
   -webkit-transition: 2s linear;
   -o-transition: 2s linear;
   -webkit-transition: 1s linear;
@@ -13,7 +13,7 @@
   height: 40px;
   background: transparent;
   border: 0;
-  background-image: url(../../../image/Close\ Icon.svg);
+  background-image: url(../../../image/close-icon.svg);
   padding: 0;
   background-size: cover;
   position: absolute;

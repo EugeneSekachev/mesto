@@ -10,8 +10,8 @@
   color: black;
   height: 100%;
   max-width: 282px;
-  max-height: 361px;
   border-radius: 10px;
+  overflow: hidden;
   margin: 0;
   padding: 0;
 }
