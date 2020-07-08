@@ -14,7 +14,7 @@ function toggleModal() {
   modal.classList.toggle('modal_is-open');
 };
 //функция возвращение формы
-function closeModalForm() {
+function openModalForm() {
   toggleModal();
 
   inputName.value = profileName.textContent;
@@ -34,8 +34,8 @@ function submitModalForm() {
 //отправка формы
 modalForm.addEventListener('submit', submitModalForm);
 //открытие и закрытие попапа
-closeModalButton.addEventListener('click', closeModalForm);
+closeModalButton.addEventListener('click', toggleModal);
 //закрытие попапа через крестик
-openModalButton.addEventListener('click', toggleModal);
+openModalButton.addEventListener('click', openModalForm);
 
 

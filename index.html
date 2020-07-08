@@ -21,52 +21,52 @@
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <p class="profile__about">Исследователь океана</p>
           </div>
-          <button type="button" class="profile__edit-button"></button>
+          <button aria-label="Редактировать" type="button" class="profile__edit-button"></button>
         </div>
       </div>
-      <button type="button" class="profile__add-button"></button>
+      <button aria-label="Добавить" type="button" class="profile__add-button"></button>
     </section>
     <section class="elements">
       <figure class="element">
         <img src="./image/element__image-karachaevsk.jpg" alt="Карачаевск" class="element__image">
         <figcaption class="element__sign">
           <h2 class="element__text">Карачаевск</h2>
-            <button type="button" class="element__heart"></button>
+          <button aria-label="Нравится" type="button" class="element__heart"></button>
         </figcaption>
       </figure>
       <figure class="element">
         <img src="./image/element__image-elbrus.jpg" alt="Эльбрус" class="element__image">
         <figcaption class="element__sign">
           <h2 class="element__text">Гора Эльбрус</h2>
-            <button type="button" class="element__heart"></button>
+          <button aria-label="Нравится" type="button" class="element__heart"></button>
         </figcaption>
       </figure>
       <figure class="element">
         <img src="./image/element__image-dombay.jpg" alt="Домбай" class="element__image">
         <figcaption class="element__sign">
           <h2 class="element__text">Домбай</h2>
-            <button type="button" class="element__heart"></button>
+          <button aria-label="Нравится" type="button" class="element__heart"></button>
         </figcaption>
       </figure>
       <figure class="element">
         <img src="./image/element__image-elbrus.jpg" alt="Эльбрус" class="element__image">
         <figcaption class="element__sign">
           <h2 class="element__text">Гора Эльбрус</h2>
-            <button type="button" class="element__heart"></button>
+          <button aria-label="Нравится" type="button" class="element__heart"></button>
         </figcaption>
       </figure>
       <figure class="element">
         <img src="./image/element__image-dombay.jpg" alt="Домбай" class="element__image">
         <figcaption class="element__sign">
           <h2 class="element__text">Домбай</h2>
-            <button type="button" class="element__heart"></button>
+          <button aria-label="Нравится" type="button" class="element__heart"></button>
         </figcaption>
       </figure>
       <figure class="element">
         <img src="./image/element__image-karachaevsk.jpg" alt="Карачаевск" class="element__image">
         <figcaption class="element__sign">
           <h2 class="element__text">Карачаевск</h2>
-            <button type="button" class="element__heart"></button>
+          <button aria-label="Нравится" type="button" class="element__heart"></button>
         </figcaption>
       </figure>
     </section>
@@ -76,11 +76,11 @@
   </footer>
   <div class="modal">
     <div class="modal__container">
-      <button type="button" class="modal__close-button"></button>
+      <button aria-label="Закрыть" type="button" class="modal__close-button"></button>
       <h3 class="modal__title">Редактировать профиль</h3>
       <form name="modal__form" method="GET" action="#" class="modal__form">
-        <input type="text" name="name" class="modal__input modal__input_type_name" value="Жак-Ив Кусто" placeholder="Имя" required>
-        <input type="text" name="about" class="modal__input modal__input_type_about" value="Исследователь океана" placeholder="О себе" required>
+        <input type="text" name="name" class="modal__input modal__input_type_name" value="" placeholder="Имя" required>
+        <input type="text" name="about" class="modal__input modal__input_type_about" value="" placeholder="О себе" required>
         <button type="submit" class="modal__save-button">Сохранить</button>
       </form>
     </div>
