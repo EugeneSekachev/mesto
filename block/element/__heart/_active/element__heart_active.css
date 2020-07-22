@@ -1,0 +1,11 @@
+.element__heart_active:hover {
+  opacity: 1;
+  -webkit-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.element__heart_active {
+  background-image: url(../../../../image/element__heart_active.svg);
+}
+
