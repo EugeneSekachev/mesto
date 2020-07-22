@@ -64,6 +64,7 @@ const createCard = (data) => {
 
   cardElement.querySelector('.element__text').textContent = data.name;
   cardElement.querySelector('.element__image').src = data.link;
+  cardElement.querySelector('.element__image').alt = data.name;
 
   cardElement.querySelector('.element__delete').addEventListener('click', function (evt) {
     evt.target.closest('.element').remove();
@@ -93,6 +94,7 @@ const initStartCard = initialCards.reverse().forEach(function (el) {
 const handlePreviewPhoto = (name, link) => {
   modalPhotoTitle.textContent = name;
   modalPhotoImg.src = link;
+  modalPhotoImg.alt = name;
 
   toggleModal(modalPhoto);
 };
