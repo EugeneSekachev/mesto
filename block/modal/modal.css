@@ -7,6 +7,7 @@
 @import url(./__form/modal__form.css);
 @import url(./__input/modal__input.css);
 @import url(./__save-button/modal__save-button.css);
+@import url(./__error/modal__error.css);
 
 .modal {
   position: fixed;

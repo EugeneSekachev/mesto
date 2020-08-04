@@ -4,7 +4,7 @@
   max-width: 358px;
   min-height: 30px;
   outline: none;
-  margin-top: 30px;
+  margin-top: 13px;
   background: #ffffff;
   font-weight: normal;
   font-size: 14px;
@@ -17,6 +17,6 @@
 
 @media screen and (max-width: 550px) {
   .modal__input {
-    margin-top: 20px;
+    margin-top: 10px;
   }
 }

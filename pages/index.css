@@ -9,5 +9,7 @@
 @import url(../block/footer/footer.css);
 @import url(../block/modal/modal.css);
 @import url(../block/modal/_is-open/modal_is-open.css);
+@import url(../block/modal/__input/_invalid/modal__input_invalid.css);
+@import url(../block/modal/__save-button/_disabled/modal__save-button_disabled.css);
 @import url(../block/modal/_type/modal_type_photo.css);
 

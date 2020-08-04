@@ -29,6 +29,12 @@ const cardTemplate = document.querySelector('.template-card').content;
 //модалка фото(контент)
 const modalPhotoTitle = modalPhoto.querySelector('.modal__photo-title');
 const modalPhotoImg = modalPhoto.querySelector('.modal__photo');
+//оверлей
+const modalOverlay = document.querySelectorAll('.modal');
+
+
+
+
 
 //стартовый массив
 const initialCards = [
@@ -115,7 +121,6 @@ const openModalAdd = () => {
 
 //функция сохранение формы
 const submitModalFormEdit = (event) => {
-  event.preventDefault();
 
   profileName.textContent = inputNameEdit.value;
   profileAbout.textContent = inputAboutEdit.value;
@@ -125,7 +130,6 @@ const submitModalFormEdit = (event) => {
 
 //сохранить карточку
 const submitModalFormAdd = (event) => {
-  event.preventDefault();
 
   renderCard({ name: inputNameAdd.value, link: inputLinkAdd.value });
 
@@ -146,5 +150,18 @@ closePhotoModal.addEventListener('click', () => toggleModal(modalPhoto));
 editModalButton.addEventListener('click', openModalEdit);
 addModalButton.addEventListener('click', openModalAdd);
 
+//функция закрытия попапов по оверлею
+modalOverlay.forEach((modalElement) => {
+  modalElement.addEventListener('mousedown', (evt) => {
+    toggleModal(evt.target);
+  });
+});
 
+//закрытие попапа через esc
+document.addEventListener('keydown', (event) => {
+  const openModal = document.querySelector('.modal_is-open');
 
+  if (event.key == 'Escape' && openModal) {
+    toggleModal(openModal);
+  }
+});
