@@ -30,10 +30,7 @@ const cardTemplate = document.querySelector('.template-card').content;
 const modalPhotoTitle = modalPhoto.querySelector('.modal__photo-title');
 const modalPhotoImg = modalPhoto.querySelector('.modal__photo');
 //оверлей
-const modalOverlay = document.querySelectorAll('.modal');
-
-
-
+const modalOverlays = document.querySelectorAll('.modal');
 
 
 //стартовый массив
@@ -85,16 +82,45 @@ const createCard = (data) => {
   return cardElement;
 }
 
-//функция открытия и закрытия модалки
-const toggleModal = (modalWindow) => modalWindow.classList.toggle('modal_is-open');
+//слушатель закрытия модалки через Esc
+function handleEscKeydown(event) {
+  const openModal = document.querySelector('.modal_is-open');
+  if (event.key == 'Escape' && openModal) {
+    closeModalItem(openModal);
+  }
+}
+
+//функция открытия попапа
+const openModalItem = (modalWindow) => {
+  modalWindow.classList.add('modal_is-open');
+  document.addEventListener('keydown', handleEscKeydown);
+}
+
+//функция закрытия попапа
+const closeModalItem = (modalWindow) => {
+  modalWindow.classList.remove('modal_is-open');
+  document.removeEventListener('keydown', handleEscKeydown);
+
+}
+
+//закрытия попапов по оверлею
+modalOverlays.forEach((modalElement) => {
+  modalElement.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('modal')) {
+      closeModalItem(evt.target);
+    };
+  })
+});
+
 
 //функция рендера карточки на страницу
 const renderCard = (data) => cardBlock.prepend(createCard(data));
 
 //стартовые карточки
-const initStartCard = initialCards.reverse().forEach(function (el) {
-  renderCard(el);
-});
+const renderCards = (cards) => {
+  cards.forEach(el => cardBlock.append(createCard(el)));
+}
+renderCards(initialCards);
 
 //функция открытия модалки-фото
 const handlePreviewPhoto = (name, link) => {
@@ -102,21 +128,27 @@ const handlePreviewPhoto = (name, link) => {
   modalPhotoImg.src = link;
   modalPhotoImg.alt = name;
 
-  toggleModal(modalPhoto);
+  openModalItem(modalPhoto);
 };
+
 
 //функция возвращение формы
 const openModalEdit = () => {
-  toggleModal(modalEdit);
+  openModalItem(modalEdit);
 
   inputNameEdit.value = profileName.textContent;
   inputAboutEdit.value = profileAbout.textContent;
+
+  resetForms(modalEditForm)
+  disableBtn(modalEditForm);
 };
 
 //открытие формы, добавить картинку с пустыми строками
 const openModalAdd = () => {
-  toggleModal(modalAdd);
+  openModalItem(modalAdd);
   modalAddForm.reset();
+  resetForms(modalAddForm);
+  disableBtn(modalAddForm);
 };
 
 //функция сохранение формы
@@ -125,43 +157,26 @@ const submitModalFormEdit = (event) => {
   profileName.textContent = inputNameEdit.value;
   profileAbout.textContent = inputAboutEdit.value;
 
-  toggleModal(modalEdit);
+  closeModalItem(modalEdit);
 };
 
 //сохранить карточку
 const submitModalFormAdd = (event) => {
-
   renderCard({ name: inputNameAdd.value, link: inputLinkAdd.value });
-
-  toggleModal(modalAdd);
+  closeModalItem(modalAdd);
 };
-
 
 //отправка формы
 modalEditForm.addEventListener('submit', submitModalFormEdit);
 modalAddForm.addEventListener('submit', submitModalFormAdd);
 
 //закрытие попапа через крестик
-closeEditModal.addEventListener('click', () => toggleModal(modalEdit));
-closeAddModal.addEventListener('click', () => toggleModal(modalAdd));
-closePhotoModal.addEventListener('click', () => toggleModal(modalPhoto));
+closeEditModal.addEventListener('click', () => closeModalItem(modalEdit));
+closeAddModal.addEventListener('click', () => closeModalItem(modalAdd));
+closePhotoModal.addEventListener('click', () => closeModalItem(modalPhoto));
 
-//открытие и закрытие попапа
+//открытие попапа
 editModalButton.addEventListener('click', openModalEdit);
 addModalButton.addEventListener('click', openModalAdd);
 
-//функция закрытия попапов по оверлею
-modalOverlay.forEach((modalElement) => {
-  modalElement.addEventListener('mousedown', (evt) => {
-    toggleModal(evt.target);
-  });
-});
 
-//закрытие попапа через esc
-document.addEventListener('keydown', (event) => {
-  const openModal = document.querySelector('.modal_is-open');
-
-  if (event.key == 'Escape' && openModal) {
-    toggleModal(openModal);
-  }
-});

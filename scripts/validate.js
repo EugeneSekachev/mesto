@@ -4,7 +4,7 @@ const formArrValidate = {
   inputSelector: '.modal__input',
   inputInvalidClass: 'modal__input_invalid',
   submitBtnSelector: '.modal__save-button',
-  inactiveBtnClass: 'modal__save-button_disabled',
+  inactiveBtnClass: 'modal__save-button_disabled'
 }
 
 //функция для валидации
@@ -21,15 +21,15 @@ const enableValidation = (formItem) => {
       inputElement.addEventListener('input', () => {
         //ошибка
         const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
-        checkValidInput(inputElement, errorElement);
         //проверка на валидность
-        const isFormValid = formInputs.some((inputElement) => !inputElement.validity.valid);
-
-        toggleBtn(isFormValid, buttonSubmit)
+        const isFormInvalid = formInputs.some((inputElement) => !inputElement.validity.valid);
+        checkValidInput(inputElement, errorElement);
+        toggleBtn(isFormInvalid, buttonSubmit);
       })
     })
   })
 };
+
 
 //функция сброса стандартного поведения сабмита
 function preventDefaultForm(elements) {
@@ -37,6 +37,19 @@ function preventDefaultForm(elements) {
     evt.preventDefault();
   })
 };
+//удаление ошибок в формах
+function resetForms(form) {
+  const arrForm = form.querySelectorAll(formArrValidate.inputSelector);
+  arrForm.forEach((el) => {
+    const errorEl = form.querySelector(`#${el.name}-error`);
+    hideError(el, errorEl);
+  })
+}
+//возвращение формы
+function hideError(el, errorEl) {
+  el.classList.remove(formArrValidate.inputInvalidClass);
+  errorEl.textContent = '';
+}
 
 //функция проверки формы на валидность
 function checkValidInput(element, error) {
@@ -44,14 +57,23 @@ function checkValidInput(element, error) {
     element.classList.add(formArrValidate.inputInvalidClass);
     error.textContent = element.validationMessage;
   } else {
-    element.classList.remove(formArrValidate.inputInvalidClass);
-    error.textContent = '';
+    hideError(element, error);
   }
 }
 
+function disableBtn(form) {
+  const btnElement = form.querySelector(formArrValidate.submitBtnSelector);
+  inactiveBtn(btnElement);
+}
+
+function inactiveBtn(btn) {
+  btn.classList.add(formArrValidate.inactiveBtnClass);
+  btn.disabled = true;
+}
+
 //функция проверки кнопки
-function toggleBtn(valid, button) {
-  if (valid) {
+function toggleBtn(invalid, button) {
+  if (invalid) {
     button.classList.add(formArrValidate.inactiveBtnClass);
     button.disabled = true;
   } else {
