@@ -1,3 +1,7 @@
+import { Card, CardList } from './card.js'
+import FormValidator from './FormValidator.js';
+
+
 //объявление переменных
 //кнопки редактировать и добавить
 const editModalButton = document.querySelector('.profile__edit-button');
@@ -22,10 +26,6 @@ const inputLinkAdd = modalAdd.querySelector('.modal__input_type_link');
 //имя и о себе
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
-//переменная зоны карточек
-const cardBlock = document.querySelector('.elements');
-//template
-const cardTemplate = document.querySelector('.template-card').content;
 //модалка фото(контент)
 const modalPhotoTitle = modalPhoto.querySelector('.modal__photo-title');
 const modalPhotoImg = modalPhoto.querySelector('.modal__photo');
@@ -61,26 +61,84 @@ const initialCards = [
   }
 ];
 
-//функция создания карточек
-const createCard = (data) => {
-  const cardElement = cardTemplate.cloneNode(true);
-
-  cardElement.querySelector('.element__text').textContent = data.name;
-  cardElement.querySelector('.element__image').src = data.link;
-  cardElement.querySelector('.element__image').alt = data.name;
-
-  cardElement.querySelector('.element__delete').addEventListener('click', function (evt) {
-    evt.target.closest('.element').remove();
-  })
-  cardElement.querySelector('.element__heart').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('element__heart_active');
-  });
-  cardElement.querySelector('.element__image').addEventListener('click', function (evt) {
-    handlePreviewPhoto(data.name, data.link);
-  });
-
-  return cardElement;
+const formArrValidate = {
+  formSelector: '.modal__form',
+  inputSelector: '.modal__input',
+  inputInvalidClass: 'modal__input_invalid',
+  submitBtnSelector: '.modal__save-button',
+  inactiveBtnClass: 'modal__save-button_disabled'
 }
+
+// class Card {
+//   constructor(data) {
+//     this._name = data.name;
+//     this._link = data.link;
+//   }
+
+//   _remove = () => {
+//     this._view.remove();
+//   }
+
+//   _like = (evt) => {
+//     evt.target.classList.toggle('element__heart_active');
+//   }
+
+//   _handlePreviewPhoto = () => {
+//     modalPhotoTitle.textContent = this._name;
+//     modalPhotoImg.src = this._link;
+//     modalPhotoImg.alt = this._name;
+
+//     openModalItem(modalPhoto);
+//   }
+//   getView() {
+//     //template
+//     const cardTemplate = document.querySelector('.template-card').content.children[0];
+//     this._view = cardTemplate.cloneNode(true);
+
+//     this._view.querySelector('.element__text').textContent = this._name;
+//     this._view.querySelector('.element__image').src = this._link;
+//     this._view.querySelector('.element__image').alt = this._name;
+
+//     this._view.querySelector('.element__delete').addEventListener('click', this._remove);
+//     this._view.querySelector('.element__heart').addEventListener('click', this._like);
+
+//     this._view.querySelector('.element__image').addEventListener('click', this._handlePreviewPhoto);
+
+//     return this._view;
+//   }
+// }
+
+// class CardList {
+//   constructor(data, createItem) {
+//     this._data = data;
+//     this._createItem = createItem;
+
+//   }
+//   addCard = (obj) => {
+//     const item = this._createItem(obj).getView();
+//     console.log(this._view);
+//     this._view.append(item);
+//   }
+//   getView() {
+
+//     this._view = document.querySelector('.elements');
+//     this._data.forEach(this.addCard);
+
+//     return this._view;
+//   }
+// }
+
+
+const createItem = (...arg) => new Card(...arg);
+
+const cardItem = (new CardList(initialCards, createItem).getView())
+
+
+
+
+
+
+
 
 //слушатель закрытия модалки через Esc
 function handleEscKeydown(event) {
@@ -113,24 +171,6 @@ modalOverlays.forEach((modalElement) => {
 });
 
 
-//функция рендера карточки на страницу
-const renderCard = (data) => cardBlock.prepend(createCard(data));
-
-//стартовые карточки
-const renderCards = (cards) => {
-  cards.forEach(el => cardBlock.append(createCard(el)));
-}
-renderCards(initialCards);
-
-//функция открытия модалки-фото
-const handlePreviewPhoto = (name, link) => {
-  modalPhotoTitle.textContent = name;
-  modalPhotoImg.src = link;
-  modalPhotoImg.alt = name;
-
-  openModalItem(modalPhoto);
-};
-
 
 //функция возвращение формы
 const openModalEdit = () => {
@@ -139,8 +179,8 @@ const openModalEdit = () => {
   inputNameEdit.value = profileName.textContent;
   inputAboutEdit.value = profileAbout.textContent;
 
-  resetForms(modalEditForm)
-  disableBtn(modalEditForm);
+  // resetForms(modalEditForm)
+  // disableBtn(modalEditForm);
 };
 
 //открытие формы, добавить картинку с пустыми строками
@@ -161,9 +201,11 @@ const submitModalFormEdit = (event) => {
 };
 
 //сохранить карточку
+const list = new CardList(initialCards);
 const submitModalFormAdd = (event) => {
-  renderCard({ name: inputNameAdd.value, link: inputLinkAdd.value });
-  closeModalItem(modalAdd);
+    const newCardItem = new Card({ name: inputNameAdd.value, link: inputLinkAdd.value });
+    list.addCard(newCardItem);
+    closeModalItem(modalAdd);
 };
 
 //отправка формы
@@ -180,3 +222,4 @@ editModalButton.addEventListener('click', openModalEdit);
 addModalButton.addEventListener('click', openModalAdd);
 
 
+const formValid = new FormValidator(formArrValidate).enableValidation();
