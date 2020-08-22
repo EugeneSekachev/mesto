@@ -1,4 +1,4 @@
-export default class FormValidator {
+export class FormValidator {
   constructor(formItem) {
     this._formSelector = formItem.formSelector;
     this._inputSelector = formItem.inputSelector;
@@ -14,7 +14,7 @@ export default class FormValidator {
   };
 
   //удаление ошибок в формах
-  _resetForms(form) {
+  resetForms(form) {
     const arrForm = form.querySelectorAll(this._inputSelector);
     arrForm.forEach((el) => {
       const errorEl = form.querySelector(`#${el.name}-error`);
@@ -37,7 +37,7 @@ export default class FormValidator {
     }
   }
 
-  _disableBtn(form) {
+  disableBtn(form) {
     const btnElement = form.querySelector(this._submitBtnSelector);
     _inactiveBtn(btnElement);
   }
