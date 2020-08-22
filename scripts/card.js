@@ -13,12 +13,14 @@ export class Card {
   }
 
   _handlePreviewPhoto = () => {
+    console.log(modalPhotoImg)
     modalPhotoTitle.textContent = this._name;
     modalPhotoImg.src = this._link;
     modalPhotoImg.alt = this._name;
 
     openModalItem(modalPhoto);
   }
+
   getView() {
     //template
     const cardTemplate = document.querySelector('.template-card').content.children[0];
@@ -45,6 +47,7 @@ export class CardList {
   }
   addCard = (obj) => {
     const item = this._createItem(obj).getView();
+
     this._view.append(item);
   }
   getView() {
@@ -55,3 +58,5 @@ export class CardList {
     return this._view;
   }
 }
+
+export const createItem = (...arg) => new Card(...arg);

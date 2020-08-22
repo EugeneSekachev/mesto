@@ -1,4 +1,4 @@
-import { Card, CardList } from './card.js'
+import { Card, CardList, createItem } from './card.js';
 import { FormValidator } from './FormValidator.js';
 
 //объявление переменных
@@ -68,10 +68,10 @@ const formArrValidate = {
   inactiveBtnClass: 'modal__save-button_disabled'
 }
 
-const createItem = (...arg) => new Card(...arg);
+// const createItem = (...arg) => new Card(...arg);
 
 const cardItem = (new CardList(initialCards, createItem).getView())
-const formValid = new FormValidator(formArrValidate).enableValidation();
+const formValid = (new FormValidator(formArrValidate).enableValidation());
 
 //слушатель закрытия модалки через Esc
 function handleEscKeydown(event) {
@@ -102,7 +102,7 @@ modalOverlays.forEach((modalElement) => {
     };
   })
 });
-
+const listForm = new FormValidator(formArrValidate);
 //функция возвращение формы
 const openModalEdit = () => {
   openModalItem(modalEdit);
@@ -110,16 +110,17 @@ const openModalEdit = () => {
   inputNameEdit.value = profileName.textContent;
   inputAboutEdit.value = profileAbout.textContent;
 
-  FormValidator.resetForms(modalEditForm);
-  FormValidator.disableBtn(modalEditForm);
+  listForm.resetForms(modalEditForm);
+  listForm.disableBtn(modalEditForm);
 };
 
 //открытие формы, добавить картинку с пустыми строками
 const openModalAdd = () => {
   openModalItem(modalAdd);
   modalAddForm.reset();
-  FormValidator.resetForms(modalAddForm);
-  FormValidator.disableBtn(modalAddForm);
+
+  listForm.resetForms(modalAddForm);
+  listForm.disableBtn(modalAddForm);
 };
 
 //функция сохранение формы
@@ -134,9 +135,9 @@ const submitModalFormEdit = (event) => {
 //сохранить карточку
 const list = new CardList(initialCards);
 const submitModalFormAdd = (event) => {
-    const newCardItem = new Card({ name: inputNameAdd.value, link: inputLinkAdd.value });
-    list.addCard(newCardItem);
-    closeModalItem(modalAdd);
+  const newCardItem = new Card({ name: inputNameAdd.value, link: inputLinkAdd.value });
+  list.addCard(newCardItem);
+  closeModalItem(modalAdd);
 };
 
 //отправка формы

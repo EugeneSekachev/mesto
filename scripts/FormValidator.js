@@ -18,7 +18,7 @@ export class FormValidator {
     const arrForm = form.querySelectorAll(this._inputSelector);
     arrForm.forEach((el) => {
       const errorEl = form.querySelector(`#${el.name}-error`);
-      _hideError(el, errorEl);
+      this._hideError(el, errorEl);
     })
   }
   //возвращение формы
@@ -33,13 +33,13 @@ export class FormValidator {
       element.classList.add(this._inputInvalidClass);
       error.textContent = element.validationMessage;
     } else {
-      _hideError(element, error);
+      this._hideError(element, error);
     }
   }
 
   disableBtn(form) {
     const btnElement = form.querySelector(this._submitBtnSelector);
-    _inactiveBtn(btnElement);
+    this._inactiveBtn(btnElement);
   }
 
   _inactiveBtn(btn) {
@@ -60,7 +60,7 @@ export class FormValidator {
   enableValidation() {
     const arrayForms = Array.from(document.querySelectorAll(this._formSelector));
     arrayForms.forEach((formElement) => {
-      //_preventDefaultForm(formElement);
+      this._preventDefaultForm(formElement);
       //облась с импутами
       const formInputs = Array.from(formElement.querySelectorAll(this._inputSelector));
       //кнопки сохранить
@@ -72,8 +72,8 @@ export class FormValidator {
           const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
           //проверка на валидность
           const isFormInvalid = formInputs.some((inputElement) => !inputElement.validity.valid);
-          _checkValidInput(inputElement, errorElement);
-          _toggleBtn(isFormInvalid, buttonSubmit);
+          this._checkValidInput(inputElement, errorElement);
+          this._toggleBtn(isFormInvalid, buttonSubmit);
         })
       })
     })
