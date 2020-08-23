@@ -31,7 +31,7 @@ const modalOverlays = document.querySelectorAll('.modal');
 //блок с карточками
 const cardBlock = document.querySelector('.elements');
 //темплейт карточки
-const cardTemplate = document.querySelector('.template-card').content.children[0].cloneNode(true);
+const cardTemplate = document.querySelector('.template-card');
 
 //стартовый массив
 const initialCards = [
@@ -70,9 +70,8 @@ const formArrValidate = {
 }
 
 initialCards.forEach((data) => {
-  const cardTemplate = document.querySelector('.template-card').content.children[0].cloneNode(true);
-    const card = new Card(data, cardTemplate);
-    cardBlock.append(card.getView());
+  const card = new Card(data, cardTemplate);
+  cardBlock.append(card.getView());
 });
 //валидация формы add
 const validateFormAdd = new FormValidator(formArrValidate);

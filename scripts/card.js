@@ -5,7 +5,7 @@ export class Card {
   constructor(data, cardTemplate) {
     this._name = data.name;
     this._link = data.link;
-    this._view = cardTemplate;
+    this._cardTemplate = cardTemplate;
   }
 
   _remove = () => {
@@ -25,6 +25,8 @@ export class Card {
   }
 
   getView() {
+    this._view = this._cardTemplate.content.children[0].cloneNode(true);;
+    
     const text = this._view.querySelector('.element__text');
     const image = this._view.querySelector('.element__image');
     const deleteBtn = this._view.querySelector('.element__delete');
