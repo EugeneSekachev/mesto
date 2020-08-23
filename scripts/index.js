@@ -1,5 +1,6 @@
 import { Card } from './card.js';
 import { FormValidator } from './FormValidator.js';
+import { openModalItem } from './utils.js';
 
 //объявление переменных
 //кнопки редактировать и добавить
@@ -25,12 +26,12 @@ const inputLinkAdd = modalAdd.querySelector('.modal__input_type_link');
 //имя и о себе
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
-//модалка фото(контент)
-const modalPhotoTitle = modalPhoto.querySelector('.modal__photo-title');
-const modalPhotoImg = modalPhoto.querySelector('.modal__photo');
 //оверлей
 const modalOverlays = document.querySelectorAll('.modal');
+//блок с карточками
 const cardBlock = document.querySelector('.elements');
+//темплейт карточки
+const cardTemplate = document.querySelector('.template-card').content.children[0].cloneNode(true);
 
 //стартовый массив
 const initialCards = [
@@ -69,31 +70,29 @@ const formArrValidate = {
 }
 
 initialCards.forEach((data) => {
-    const card = new Card(data);
+  const cardTemplate = document.querySelector('.template-card').content.children[0].cloneNode(true);
+    const card = new Card(data, cardTemplate);
     cardBlock.append(card.getView());
 });
-//валидация
-const formValid = (new FormValidator(formArrValidate).enableValidation());
+//валидация формы add
+const validateFormAdd = new FormValidator(formArrValidate);
+validateFormAdd.enableValidation();
+//валидация формы edit
+const validateFormEdit = new FormValidator(formArrValidate);
+validateFormEdit.enableValidation();
 
 //слушатель закрытия модалки через Esc
 function handleEscKeydown(event) {
   const openModal = document.querySelector('.modal_is-open');
-  if (event.key == 'Escape' && openModal) {
+  if (event.key === 'Escape' && openModal) {
     closeModalItem(openModal);
   }
-}
-
-//функция открытия попапа
-export const openModalItem = (modalWindow) => {
-  modalWindow.classList.add('modal_is-open');
-  document.addEventListener('keydown', handleEscKeydown);
 }
 
 //функция закрытия попапа
 const closeModalItem = (modalWindow) => {
   modalWindow.classList.remove('modal_is-open');
   document.removeEventListener('keydown', handleEscKeydown);
-
 }
 
 //закрытия попапов по оверлею
@@ -101,10 +100,10 @@ modalOverlays.forEach((modalElement) => {
   modalElement.addEventListener('mousedown', (evt) => {
     if (evt.target.classList.contains('modal')) {
       closeModalItem(evt.target);
-    };
+    }
   })
 });
-const listForm = new FormValidator(formArrValidate);
+
 //функция возвращение формы
 const openModalEdit = () => {
   openModalItem(modalEdit);
@@ -112,8 +111,8 @@ const openModalEdit = () => {
   inputNameEdit.value = profileName.textContent;
   inputAboutEdit.value = profileAbout.textContent;
 
-  listForm.resetForms(modalEditForm);
-  listForm.disableBtn(modalEditForm);
+  validateFormEdit.resetForms(modalEditForm);
+  validateFormEdit.disableBtn(modalEditForm);
 };
 
 //открытие формы, добавить картинку с пустыми строками
@@ -121,13 +120,12 @@ const openModalAdd = () => {
   openModalItem(modalAdd);
   modalAddForm.reset();
 
-  listForm.resetForms(modalAddForm);
-  listForm.disableBtn(modalAddForm);
+  validateFormAdd.resetForms(modalAddForm);
+  validateFormAdd.disableBtn(modalAddForm);
 };
 
 //функция сохранение формы
 const submitModalFormEdit = (event) => {
-
   profileName.textContent = inputNameEdit.value;
   profileAbout.textContent = inputAboutEdit.value;
 
@@ -136,7 +134,7 @@ const submitModalFormEdit = (event) => {
 
 //сохранить карточку
 const submitModalFormAdd = (event) => {
-  const newCardItem = (new Card({ name: inputNameAdd.value, link: inputLinkAdd.value }).getView());
+  const newCardItem = new Card({ name: inputNameAdd.value, link: inputLinkAdd.value }, cardTemplate).getView();
   cardBlock.prepend(newCardItem);
   closeModalItem(modalAdd);
 };

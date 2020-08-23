@@ -1,14 +1,11 @@
-import { openModalItem } from './index.js';
-
-const modalPhoto = document.querySelector('.modal_type_photo');
-const modalPhotoTitle = modalPhoto.querySelector('.modal__photo-title');
-const modalPhotoImg = modalPhoto.querySelector('.modal__photo');
+import { openModalItem, modalPhoto, modalPhotoTitle, modalPhotoImg } from './utils.js';
 
 
 export class Card {
-  constructor(data) {
+  constructor(data, cardTemplate) {
     this._name = data.name;
     this._link = data.link;
+    this._view = cardTemplate;
   }
 
   _remove = () => {
@@ -28,18 +25,19 @@ export class Card {
   }
 
   getView() {
-    //template
-    const cardTemplate = document.querySelector('.template-card').content.children[0];
-    this._view = cardTemplate.cloneNode(true);
+    const text = this._view.querySelector('.element__text');
+    const image = this._view.querySelector('.element__image');
+    const deleteBtn = this._view.querySelector('.element__delete');
+    const heartBtn = this._view.querySelector('.element__heart');
 
-    this._view.querySelector('.element__text').textContent = this._name;
-    this._view.querySelector('.element__image').src = this._link;
-    this._view.querySelector('.element__image').alt = this._name;
+    text.textContent = this._name;
+    image.src = this._link;
+    image.alt = this._name;
 
-    this._view.querySelector('.element__delete').addEventListener('click', this._remove);
-    this._view.querySelector('.element__heart').addEventListener('click', this._like);
+    deleteBtn.addEventListener('click', this._remove);
+    heartBtn.addEventListener('click', this._like);
 
-    this._view.querySelector('.element__image').addEventListener('click', this._handlePreviewPhoto);
+    image.addEventListener('click', this._handlePreviewPhoto);
 
     return this._view;
   }
