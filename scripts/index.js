@@ -1,6 +1,6 @@
 import { Card } from './card.js';
 import { FormValidator } from './FormValidator.js';
-import { openModalItem } from './utils.js';
+import { openModalItem, closeModalItem } from './utils.js';
 
 //объявление переменных
 //кнопки редактировать и добавить
@@ -81,19 +81,6 @@ validateFormAdd.enableValidation();
 const validateFormEdit = new FormValidator(formArrValidate);
 validateFormEdit.enableValidation();
 
-//слушатель закрытия модалки через Esc
-function handleEscKeydown(event) {
-  const openModal = document.querySelector('.modal_is-open');
-  if (event.key === 'Escape' && openModal) {
-    closeModalItem(openModal);
-  }
-}
-
-//функция закрытия попапа
-const closeModalItem = (modalWindow) => {
-  modalWindow.classList.remove('modal_is-open');
-  document.removeEventListener('keydown', handleEscKeydown);
-}
 
 //закрытия попапов по оверлею
 modalOverlays.forEach((modalElement) => {
