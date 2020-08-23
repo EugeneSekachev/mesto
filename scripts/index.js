@@ -1,4 +1,4 @@
-import { Card, CardList, createItem } from './card.js';
+import { Card } from './card.js';
 import { FormValidator } from './FormValidator.js';
 
 //объявление переменных
@@ -30,7 +30,7 @@ const modalPhotoTitle = modalPhoto.querySelector('.modal__photo-title');
 const modalPhotoImg = modalPhoto.querySelector('.modal__photo');
 //оверлей
 const modalOverlays = document.querySelectorAll('.modal');
-
+const cardBlock = document.querySelector('.elements');
 
 //стартовый массив
 const initialCards = [
@@ -68,9 +68,11 @@ const formArrValidate = {
   inactiveBtnClass: 'modal__save-button_disabled'
 }
 
-// const createItem = (...arg) => new Card(...arg);
-
-const cardItem = (new CardList(initialCards, createItem).getView())
+initialCards.forEach((data) => {
+    const card = new Card(data);
+    cardBlock.append(card.getView());
+});
+//валидация
 const formValid = (new FormValidator(formArrValidate).enableValidation());
 
 //слушатель закрытия модалки через Esc
@@ -82,7 +84,7 @@ function handleEscKeydown(event) {
 }
 
 //функция открытия попапа
-const openModalItem = (modalWindow) => {
+export const openModalItem = (modalWindow) => {
   modalWindow.classList.add('modal_is-open');
   document.addEventListener('keydown', handleEscKeydown);
 }
@@ -133,10 +135,9 @@ const submitModalFormEdit = (event) => {
 };
 
 //сохранить карточку
-const list = new CardList(initialCards);
 const submitModalFormAdd = (event) => {
-  const newCardItem = new Card({ name: inputNameAdd.value, link: inputLinkAdd.value });
-  list.addCard(newCardItem);
+  const newCardItem = (new Card({ name: inputNameAdd.value, link: inputLinkAdd.value }).getView());
+  cardBlock.prepend(newCardItem);
   closeModalItem(modalAdd);
 };
 

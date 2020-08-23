@@ -1,3 +1,10 @@
+import { openModalItem } from './index.js';
+
+const modalPhoto = document.querySelector('.modal_type_photo');
+const modalPhotoTitle = modalPhoto.querySelector('.modal__photo-title');
+const modalPhotoImg = modalPhoto.querySelector('.modal__photo');
+
+
 export class Card {
   constructor(data) {
     this._name = data.name;
@@ -13,7 +20,6 @@ export class Card {
   }
 
   _handlePreviewPhoto = () => {
-    console.log(modalPhotoImg)
     modalPhotoTitle.textContent = this._name;
     modalPhotoImg.src = this._link;
     modalPhotoImg.alt = this._name;
@@ -38,25 +44,3 @@ export class Card {
     return this._view;
   }
 }
-
-export class CardList {
-  constructor(data, createItem) {
-    this._data = data;
-    this._createItem = createItem;
-
-  }
-  addCard = (obj) => {
-    const item = this._createItem(obj).getView();
-
-    this._view.append(item);
-  }
-  getView() {
-
-    this._view = document.querySelector('.elements');
-    this._data.forEach(this.addCard);
-
-    return this._view;
-  }
-}
-
-export const createItem = (...arg) => new Card(...arg);
